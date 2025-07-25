@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Soham Kolhe's personal portfolio website showcasing his skills and projects as a Flutter Developer.">
+    <meta name="keywords" content="Soham Kolhe, Flutter Developer, App Developer, Portfolio, Tech Explorer">
+    <title>Soham Kolhe - Flutter Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <img src="./profile.jpeg" alt="Soham Kolhe" class="logo-image" style="height:40px;">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Variables & Base Styles --- */
+        :root {
+            --bg-navy: #0a0a0a;
+            --card-gray: #1c1c1c;
+            --highlight-blue: #ffffff;
+            --light-blue-glow: rgba(255, 255, 255, 0.05);
+            --text-light: #f1f5f9;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-navy);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Prevents horizontal scroll from animations */
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(28, 28, 28, 0), var(--bg-navy) 70%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            border-bottom: 1px solid var(--card-gray);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--text-light);
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background-color: var(--highlight-blue);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--highlight-blue);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--highlight-blue);
+        }
+
+        p {
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--highlight-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--highlight-blue);
+            color: var(--bg-navy);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--highlight-blue);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- Header & Navigation --- */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--card-gray);
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .logo span {
+            color: var(--highlight-blue);
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .main-nav ul li {
+            margin-left: 2rem;
+        }
+
+        .main-nav ul li a {
+            color: var(--text-light);
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .main-nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--highlight-blue);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Intro Section --- */
+        #intro {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .intro-content {
+            max-width: 800px;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid var(--highlight-blue);
+            margin: 0 auto 1.5rem;
+            object-fit: cover;
+            box-shadow: 0 0 30px var(--highlight-blue);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 35px rgba(255, 255, 255, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        #intro h1 {
+            margin-bottom: 0.5rem;
+        }
+
+        #intro .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-light);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translate(-50%, 0);
+            }
+
+            40% {
+                transform: translate(-50%, -20px);
+            }
+
+            60% {
+                transform: translate(-50%, -10px);
+            }
+        }
+
+        /* --- Section: Generic Card Styles --- */
+        .card {
+            background: var(--card-gray);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid transparent;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--highlight-blue);
+        }
+
+        /* --- Profile Section --- */
+        #profile .profile-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        #profile .bio {
+            flex: 2;
+        }
+
+        #profile .contact-info {
+            flex: 1;
+            background: var(--card-gray);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        #profile .contact-info ul {
+            list-style: none;
+        }
+
+        #profile .contact-info ul li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        #profile .contact-info ul li svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            fill: var(--highlight-blue);
+        }
+
+        .social-links a {
+            margin-right: 1rem;
+        }
+
+        .social-links svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--text-gray);
+            transition: fill 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover svg {
+            fill: var(--highlight-blue);
+            transform: scale(1.2);
+        }
+
+        /* --- Experience Section --- */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .experience-card {
+            border-left: 5px solid var(--highlight-blue);
+        }
+
+        .experience-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-card .duration {
+            color: var(--text-gray);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Skillset Section --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background: var(--card-gray);
+            color: var(--text-light);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--highlight-blue);
+            color: var(--bg-navy);
+            transform: scale(1.1);
+        }
+
+        .skills-heading {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            color: var(--text-gray);
+        }
+
+        #skills .skills-heading:not(:first-of-type) {
+            margin-top: 4rem;
+        }
+
+        /* --- Projects Section --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--card-gray);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding: 0;
+        }
+
+        .mobile-mockup {
+            background: #111;
+            border: 8px solid #111;
+            border-radius: 40px;
+            margin: 2rem auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 0 2px #333;
+            position: relative;
+            width: 200px;
+            height: 400px;
+        }
+
+        .mobile-mockup::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 6px;
+            background: #000;
+            border-radius: 3px;
+            z-index: 2;
+        }
+
+        .mobile-mockup .screen {
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-navy);
+            border-radius: 32px;
+            overflow: hidden;
+        }
+
+        .mobile-mockup .screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .screen img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 0 1.5rem 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-stack {
+            margin: 1rem 0;
+            flex-grow: 1;
+        }
+
+        .tech-stack .tag {
+            display: inline-block;
+            background: var(--bg-navy);
+            color: var(--highlight-blue);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 5px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--highlight-blue);
+        }
+
+        .project-links a {
+            font-weight: 700;
+        }
+
+        /* --- Certifications & Extra-Curricular --- */
+        .grid-2-col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .cert-card svg {
+            width: 60px;
+            height: 60px;
+            fill: var(--highlight-blue);
+            margin-bottom: 1rem;
+        }
+
+        .cert-card h3 {
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+
+        /* --- Contact Section --- */
+        #contact .container {
+            max-width: 800px;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--card-gray);
+            background: var(--card-gray);
+            color: var(--text-light);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--highlight-blue);
+            box-shadow: 0 0 10px var(--light-blue-glow);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form .btn {
+            justify-self: start;
+            border: none;
+            cursor: pointer;
+        }
+
+        .contact-info-footer {
+            text-align: center;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background: var(--card-gray);
+            margin-top: -1px;
+        }
+
+        /* --- Animation Classes --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in {
+            transform: translateY(20px);
+        }
+
+        .slide-in-left {
+            transform: translateX(-50px);
+        }
+
+        .slide-in-right {
+            transform: translateX(50px);
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+
+            #profile .profile-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">Soham<span>.</span></a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Intro Section -->
+    <section id="intro">
+        <div class="container">
+            <div class="intro-content">
+                <img src="./profile.jpeg" alt="Soham Kolhe Profile Picture" class="profile-image">
+                <h1 class="animate-on-scroll fade-in">Hi, I'm Soham Kolhe</h1>
+                <p class="subtitle animate-on-scroll fade-in" style="transition-delay: 0.2s;">Flutter Developer | App
+                    Builder</p>
+                <a href="./Soham-kolhe-resume.pdf" class="btn animate-on-scroll fade-in" style="transition-delay: 0.4s;"
+                    download>View My Resume</a>
+            </div>
+        </div>
+        <a href="#profile" class="scroll-down">&#8595;</a>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile">
+        <div class="container">
+            <h2 class="animate-on-scroll fade-in">Profile</h2>
+            <div class="profile-content">
+                <div class="bio animate-on-scroll slide-in-left">
+                    <h3>About Me</h3>
+                    <p>
+                        Experienced Flutter developer with a strong foundation in app development, seeking a position
+                        where I can leverage my expertise in creating innovative mobile solutions using Flutter, Dart,
+                        Node.js, Express.js, Hive, MongoDB and Firebase technologies. I am passionate about building
+                        beautiful, functional, and user-centric applications that solve real-world problems.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/soham-kolhe-a24b12204/" target="_blank" title="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </a>
+                        <a href="https://github.com/sohamkolhe9829" target="_blank" title="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="contact-info card animate-on-scroll slide-in-right">
+                    <ul>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2zm0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527zm7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602z" />
+                            </svg> <span>Pune, Maharashtra</span></li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z" />
+                            </svg> <span>sohamkolhe9829@gmail.com</span></li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M20 22.621l-3.521-6.795c-.018-.034-.042-.063-.063-.094l-1.023-1.553-3.18-2.435-4.213-2.435-4-2.313-2-1.157v-4.839l2-1.157 4-2.313 4.213-2.435 3.18-2.435 1.023-1.553c.021-.031.045-.06.063-.094l3.521-6.795h-20v24h16z" />
+                            </svg> <a href="./Soham-kolhe-resume.pdf" download>Download Resume</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="animate-on-scroll fade-in">Experience</h2>
+            <div class="experience-grid">
+                <div class="experience-card card animate-on-scroll fade-in">
+                    <h3>Milcko – Flutter Intern</h3>
+                    <p class="duration">Oct 2024 - Apr 2025 | Bhopal, MP</p>
+                    <p>Worked independently on consumer and farmer-centric applications. Gained hands-on experience with
+                        Flutter, Firebase, Git/GitHub, and CI/CD pipelines, strengthening technical expertise on
+                        real-world applications.</p>
+                </div>
+                <div class="experience-card card animate-on-scroll fade-in" style="transition-delay: 0.2s;">
+                    <h3>Livinart Technologies – Jr. Flutter Developer</h3>
+                    <p class="duration">Jul 2023 - Oct 2023 | Bhopal, MP</p>
+                    <p>Independently developed several projects including an LMS and an Invoice Management system.
+                        Gained hands-on experience with Flutter, Firebase, REST APIs, and CI/CD pipelines, equipping me
+                        with strong technical skills.</p>
+                </div>
+                <div class="experience-card card animate-on-scroll fade-in" style="transition-delay: 0.4s;">
+                    <h3>Spotrental – Flutter Intern</h3>
+                    <p class="duration">Nov 2022 - Mar 2023 | Bhopal, MP</p>
+                    <p>Contributed to the live Spotbuy project, a platform for buying and selling second-hand vehicles.
+                        My work included integrating Firebase for vehicle registration and display, providing valuable
+                        industry insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skillset Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="animate-on-scroll fade-in">Skillset</h2>
+
+            <h3 class="skills-heading animate-on-scroll fade-in">Technical Skills</h3>
+            <div class="skills-container animate-on-scroll fade-in">
+                <span class="skill-tag">Flutter</span><span class="skill-tag">Dart</span><span
+                    class="skill-tag">Firebase</span><span class="skill-tag">Node.js</span><span
+                    class="skill-tag">Express.js</span><span class="skill-tag">MongoDB</span><span
+                    class="skill-tag">Hive</span><span class="skill-tag">REST APIs</span><span
+                    class="skill-tag">CI/CD</span><span class="skill-tag">VS Code</span><span class="skill-tag">Android
+                    Studio</span><span class="skill-tag">Postman</span>
+            </div>
+
+            <h3 class="skills-heading animate-on-scroll fade-in">Soft Skills</h3>
+            <div class="skills-container animate-on-scroll fade-in" style="transition-delay: 0.2s;">
+                <span class="skill-tag">Communication</span>
+                <span class="skill-tag">Problem Solving</span>
+                <span class="skill-tag">Teamwork</span>
+                <span class="skill-tag">Adaptability</span>
+                <span class="skill-tag">English</span>
+                <span class="skill-tag">Hindi</span>
+                <span class="skill-tag">Marathi</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="animate-on-scroll fade-in">My Projects</h2>
+            <div class="projects-grid">
+                <!-- Project Card 1 -->
+                <div class="project-card card animate-on-scroll fade-in">
+                    <div class="mobile-mockup">
+                        <div class="screen">
+                            <img src="./campusway.jpg" alt="CampusWay App Preview"
+                                onerror="this.onerror=null;this.src='https://placehold.co/300x600/1c1c1c/ffffff?text=Preview+Not+Available';">
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>CampusWay</h3>
+                        <p>A one-stop shop for college life: share notes, find events, and connect with peers.</p>
+                        <div class="tech-stack"><span class="tag">Flutter</span><span class="tag">Firebase</span><span
+                                class="tag">Dart</span></div>
+                        <div class="project-links"><a href="https://play.google.com/store/apps/details?id=com.campusway"
+                                target="_blank" class="btn">Try it</a></div>
+                    </div>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="project-card card animate-on-scroll fade-in" style="transition-delay: 0.2s;">
+                    <div class="mobile-mockup">
+                        <div class="screen">
+                            <img src="./afeias.webp" alt="AFEIAS App Preview"
+                                onerror="this.onerror=null;this.src='https://placehold.co/300x600/1c1c1c/ffffff?text=Preview+Not+Available';">
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>AFEIAS</h3>
+                        <p>Mobile app for civil services aspirants with over 500k+ downloads on Play Store.</p>
+                        <div class="tech-stack"><span class="tag">Flutter</span><span class="tag">Firebase</span><span
+                                class="tag">REST APIs</span></div>
+                        <div class="project-links"><a
+                                href="https://play.google.com/store/apps/details?id=com.afeias.afeias" target="_blank"
+                                class="btn">Try it</a></div>
+                    </div>
+                </div>
+                <!-- Project Card 3 -->
+                <div class="project-card card animate-on-scroll fade-in" style="transition-delay: 0.4s;">
+                    <div class="mobile-mockup">
+                        <div class="screen">
+                            <img src="./heystallers.jpg" alt="Heystallers App Preview"
+                                onerror="this.onerror=null;this.src='https://placehold.co/300x600/1c1c1c/ffffff?text=Preview+Not+Available';">
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Heystallers</h3>
+                        <p>A food discovery app to explore local food stalls, read reviews, and share experiences.</p>
+                        <div class="tech-stack"><span class="tag">Flutter</span><span class="tag">Firebase</span><span
+                                class="tag">Node.js</span></div>
+                        <div class="project-links"><a href="#" class="btn">Try it</a></div>
+                    </div>
+                </div>
+                <!-- Project Card 4 -->
+                <div class="project-card card animate-on-scroll fade-in" style="transition-delay: 0.4s;">
+                    <div class="mobile-mockup">
+                        <div class="screen">
+                            <img src="./techstuff.png" alt="TechStuff App Preview"
+                                onerror="this.onerror=null;this.src='https://placehold.co/300x600/1c1c1c/ffffff?text=Preview+Not+Available';">
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>TechStuff</h3>
+                        <p>A tech shopping app to compare and shop confidently for gadgets and accessories.</p>
+                        <div class="tech-stack"><span class="tag">Flutter</span><span class="tag">Firebase</span><span
+                                class="tag">Node.js</span></div>
+                        <div class="project-links"><a href="#" class="btn">Try it</a></div>
+                    </div>
+                </div>
+                <!-- Project Card 5 -->
+                <div class="project-card card animate-on-scroll fade-in" style="transition-delay: 0.4s;">
+                    <div class="mobile-mockup">
+                        <div class="screen">
+                            <img src="./flimaxads.png" alt="Flimaxads App Preview"
+                                onerror="this.onerror=null;this.src='https://placehold.co/300x600/1c1c1c/ffffff?text=Preview+Not+Available';">
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Flimaxads (Freelance Project)</h3>
+                        <p>A business management solution with real-time notifications and digital payment features.</p>
+                        <div class="tech-stack"><span class="tag">Flutter</span><span class="tag">Firebase</span>
+                            <span class="tag">REST APIs</span>
+                            <span class="tag">Payment Gateways</span>
+                            <span class="tag">Internationalization</span>
+                        </div>
+                        <div class="project-links"><a href="#" class="btn">Try it</a></div>
+                    </div>
+                </div>
+                <!-- Project Card 6 -->
+                <div class="project-card card animate-on-scroll fade-in" style="transition-delay: 0.4s;">
+                    <div class="mobile-mockup">
+                        <div class="screen">
+                            <img src="https://placehold.co/300x600/1c1c1c/ffffff?text=SpotBuy" alt="SpotBuy App Preview"
+                                onerror="this.onerror=null;this.src='https://placehold.co/300x600/1c1c1c/ffffff?text=Preview+Not+Available';">
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>SpotBuy</h3>
+                        <p>A second-hand vehicle marketplace to simplify buying and selling used cars.</p>
+                        <div class="tech-stack"><span class="tag">Flutter</span><span class="tag">Firebase</span>
+                            <span class="tag">Git & Github</span>
+                        </div>
+                        <div class="project-links"><a href="#" class="btn">Try it</a></div>
+                    </div>
+                </div>
+                <!-- Project Card 7 -->
+                <div class="project-card card animate-on-scroll fade-in" style="transition-delay: 0.4s;">
+                    <div class="mobile-mockup">
+                        <div class="screen">
+                            <img src="./travault.jpg" alt="Travault App Preview"
+                                onerror="this.onerror=null;this.src='https://placehold.co/300x600/1c1c1c/ffffff?text=Preview+Not+Available';">
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Travault</h3>
+                        <p>A smart travel app with AI-powered itinerary planning, review summarization, and community
+                            tips.</p>
+                        <div class="tech-stack"><span class="tag">Flutter</span><span class="tag">Firebase</span>
+                            <span class="tag">Git & Github</span>
+                            <span class="tag">Google Maps API</span>
+                            <span class="tag">AI APIs</span>
+                        </div>
+                        <div class="project-links"><a href="#" class="btn">Try it</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications & Achievements -->
+    <section id="certifications">
+        <div class="container">
+            <h2 class="animate-on-scroll fade-in">Certifications & Achievements</h2>
+            <div class="grid-2-col">
+                <div class="cert-card card animate-on-scroll fade-in">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0l-12 5.218 3.714 13.782h16.572l3.714-13.782-12-5.218zm-7.953 6.718l7.953-3.443 7.953 3.443-2.98 11.064h-9.946l-2.98-11.064zm5.953 4.282h4v2h-4v-2zm0 3h4v2h-4v-2z" />
+                    </svg>
+                    <h3>Top 1000 – IIT Delhi Ideathon</h3>
+                    <p>Aug 2024</p>
+                </div>
+                <div class="cert-card card animate-on-scroll fade-in" style="transition-delay: 0.2s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 17.25l-4.5-4.319 1.899-1.899 2.601 2.482 5.851-5.642 1.9 1.9-7.751 7.478z" />
+                    </svg>
+                    <h3>Postman Student Expert</h3>
+                    <p>Jul 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extra-Curricular Activities -->
+    <section id="extra-curricular">
+        <div class="container">
+            <h2 class="animate-on-scroll fade-in">Extra-Curricular Activities</h2>
+            <div class="grid-2-col">
+                <div class="activity-card card animate-on-scroll fade-in">
+                    <h3>Mobile Lead – Developers Club LNCT</h3>
+                    <p>Leading the mobile team, organizing workshops, and mentoring students in Flutter development to
+                        create impactful solutions.</p>
+                </div>
+                <div class="activity-card card animate-on-scroll fade-in" style="transition-delay: 0.2s;">
+                    <h3>Volunteer – GDG LNCTS</h3>
+                    <p>Contributing to organizing workshops and technical sessions on Google technologies, fostering a
+                        vibrant learning community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container animate-on-scroll fade-in">
+            <h2>Get In Touch</h2>
+            <p style="text-align:center; max-width: 600px; margin: 0 auto 3rem;">I'm currently open to new
+                opportunities. If you have a project in mind, want to collaborate, or just want to say hi, feel free to
+                reach out!</p>
+            <!-- Formspree endpoint added. Replace 'your_form_id' with your actual Formspree form ID. -->
+            <form class="contact-form" action="https://formspree.io/f/xblkgnqb" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+            <div class="contact-info-footer">
+                <p>Email: sohamkolhe9829@gmail.com | Phone: +91 7470379829</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Soham Kolhe. Crafted with passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for scroll animations
+        document.addEventListener("DOMContentLoaded", function () {
+            const options = {
+                root: null, // relative to the viewport
+                rootMargin: '0px',
+                threshold: 0.1 // 10% of the item has to be visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: unobserve the element after it's visible
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+
+            // Select all elements to animate
+            const targets = document.querySelectorAll('.animate-on-scroll');
+            targets.forEach(target => {
+                observer.observe(target);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
